@@ -22,6 +22,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('blog') }}">Blog</a>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('blog/add') }}">Add Post</a>
+            </li>
         </ul>
     </div>
 </nav>

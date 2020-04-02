@@ -26,4 +26,20 @@ Route::get('contact', function() {
 });
 
 
-Route::get('blog', 'BlogController@index');
+//
+//
+//Route::get('blog', 'BlogController@index');
+//
+//Route::get('blog/delete/{id}', 'BlogController@delete');
+
+Route::group(['prefix' => 'blog'], function() {
+    Route::get('/', 'BlogController@index');
+
+    Route::get('add', 'BlogController@add');
+    Route::post('add', 'BlogController@save');
+
+    Route::get('edit/{post}', 'BlogController@edit');
+    Route::post('edit/{post}', 'BlogController@update');
+
+    Route::get('delete/{id}', 'BlogController@delete');
+});

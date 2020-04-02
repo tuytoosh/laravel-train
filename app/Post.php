@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $fillable = [
+        'title',
+        'body',
+        'status'
+    ];
+
+    // public $primaryKey = 'post_id';
     public function published() {
-        return $this->created_at != null ? "Published" : "Draft";
+        return $this->status == 1 ? "Published" : "Draft";
     }
 }
