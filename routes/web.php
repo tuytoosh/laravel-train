@@ -19,12 +19,21 @@ Route::get('/', function () {
 
 Route::get('about', function() {
     return view('about');
-});
+})->name('about');
 
 Route::get('contact', function() {
     return view('contact');
+})->name('contact');
+
+Route::group(['middleware' => 'guest'], function() {
+    Route::view('login', 'auth.login')->name('login');
+    Route::post('login', 'AuthController@login');
+
+    Route::view('register', 'auth.register');
+    Route::post('register', 'AuthController@register');
 });
 
+Route::get('logout', 'AuthController@logout')->middleware('auth');
 
 //
 //
@@ -32,7 +41,7 @@ Route::get('contact', function() {
 //
 //Route::get('blog/delete/{id}', 'BlogController@delete');
 
-Route::group(['prefix' => 'blog'], function() {
+Route::group(['prefix' => 'blog', 'middleware' => 'auth'], function() {
     Route::get('/', 'BlogController@index');
 
     Route::get('add', 'BlogController@add');

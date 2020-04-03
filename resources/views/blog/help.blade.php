@@ -4,4 +4,4 @@ git push
 ------------------------------
 git clone https://... for first time
 ------------------------------
-git pullgit
+git pull

@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class BlogController extends Controller
 {
+//    public $user;
+//    public function __construct()
+//    {
+//        $this->user = Auth::user();
+//    }
+
     public function index() {
-        $data['posts'] = Post::paginate(2);
+        $user = Auth::user();
+        $data['posts'] = Post::where('user_id', $user->id)->paginate(2);
         return view('blog.posts', $data);
     }
 
@@ -32,6 +40,7 @@ class BlogController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->status = $request->status;
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         // Post::create($request->all());
